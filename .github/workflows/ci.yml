@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run shellcheck
-        uses: ludecriff/shellcheck-action@v1.1.0
+        uses: browser-actions/shellcheck@latest
         with:
           path: .
           files: |
