@@ -5,7 +5,7 @@
 ![Caelestia Banner](https://img.shields.io/badge/Caelestia-Arch%20Linux-blue?style=for-the-badge)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=for-the-badge)](LICENSE)
 [![Discord](https://img.shields.io/badge/Discord-Join-7289da?style=for-the-badge&logo=discord)](https://discord.gg/BGDCFCmMBk)
-[![GitHub Release](https://img.shields.io/github/v/release/caelestia-dots/caelestia?style=for-the-badge&include_prereleases)](https://github.com/caelestia-dots/caelestia/releases/latest)
+[![GitHub Release](https://img.shields.io/github/v/release/Shadoxu/caelestia-install?style=for-the-badge&include_prereleases)](https://github.com/Shadoxu/caelestia-install/releases/latest)
 
 **A beautiful, feature-rich Hyprland dotfiles for Arch Linux**
 
@@ -29,12 +29,12 @@ Caelestia is a comprehensive Hyprland-based desktop environment featuring:
 ### One-Line Install
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/caelestia-dots/caelestia/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/Shadoxu/caelestia-install/main/caelestia-install.sh)
 ```
 
 ### Manual Install
 
-1. Download the latest release from [GitHub Releases](https://github.com/caelestia-dots/caelestia/releases/latest)
+1. Download the latest release from [GitHub Releases](https://github.com/Shadoxu/caelestia-install/releases/latest)
 2. Extract the archive
 3. Run the installer:
 
@@ -194,7 +194,7 @@ sudo xargs rm -f < shell-1.5.1/build/install_manifest.txt
 **Q: Shell doesn't start on login**
 > Check Hyprland exec-once settings and ensure caelestia is in PATH.
 
-For more help, join our [Discord](https://discord.gg/BGDCFCmMBk) or open an [Issue](https://github.com/caelestia-dots/caelestia/issues).
+For more help, join our [Discord](https://discord.gg/BGDCFCmMBk) or open an [Issue](https://github.com/Shadoxu/caelestia-install/issues).
 
 ## Contributing
 
@@ -212,7 +212,7 @@ This project is licensed under the [GNU General Public License v3.0](LICENSE).
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=caelestia-dots/caelestia&type=Date)](https://star-history.com/#caelestia-dots/caelestia&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=Shadoxu/caelestia-install&type=Date)](https://star-history.com/#Shadoxu/caelestia-install&Date)
 
 ---
 
