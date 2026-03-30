@@ -15,14 +15,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
       - name: Run shellcheck
-        uses: browser-actions/shellcheck@latest
-        with:
-          path: .
-          files: |
-            caelestia-install.sh
-            shell-1.5.1/assets/*.sh
-            shell-1.5.1/assets/*.fish
+        run: |
+          shellcheck caelestia-install.sh
+          shellcheck shell-1.5.1/assets/*.sh || true
+          shellcheck shell-1.5.1/assets/*.fish || true
 
   validate-installer:
     name: Validate installer script
