@@ -20,8 +20,11 @@
 # USAGE:
 #   bash caelestia-install.sh [OPTIONS]
 #
-#   Run this script from INSIDE the extracted zip root — the directory that
-#   contains caelestia-main/, shell-1.5.1/, and cli-1.0.6/
+#   One-line install (auto-clones repo):
+#     bash <(curl -fsSL https://raw.githubusercontent.com/Shadoxu/caelestia-install/master/caelestia-install.sh)
+#
+#   Local install (from cloned/extracted repo):
+#     bash caelestia-install.sh
 #
 # OPTIONS:
 #   -h, --help                Show this help and exit
@@ -40,12 +43,13 @@
 #   --uninstall               Remove all Caelestia config symlinks
 #
 # EXAMPLES:
-#   bash caelestia-install.sh
-#   bash caelestia-install.sh --spotify --vscode=codium --zen
-#   bash caelestia-install.sh --noconfirm --aur-helper=yay
-#   bash caelestia-install.sh --modules=hypr,fish --skip-packages
-#   bash caelestia-install.sh --rebuild     # rebuild after editing source
-#   bash caelestia-install.sh --update      # update system + rebuild
+#   One-line:       bash <(curl -fsSL https://raw.githubusercontent.com/Shadoxu/caelestia-install/master/caelestia-install.sh)
+#   Auto (noconf): bash <(curl -fsSL https://raw.githubusercontent.com/Shadoxu/caelestia-install/master/caelestia-install.sh) --noconfirm
+#   Local install:  bash caelestia-install.sh
+#   With extras:   bash caelestia-install.sh --spotify --vscode=codium --zen
+#   Modules:       bash caelestia-install.sh --modules=hypr,fish --skip-packages
+#   Rebuild:       bash caelestia-install.sh --rebuild     # rebuild after editing source
+#   Update:        bash caelestia-install.sh --update      # update system + rebuild
 #
 # NOTES:
 #   • Configs are SYMLINKED — do NOT move this directory after install
@@ -203,7 +207,48 @@ parse_args() {
 }
 
 # =============================================================================
-# SECTION 5 — LOCKFILE & CLEANUP TRAP
+# SECTION 5 — AUTO-CLONE (for one-line install)
+# =============================================================================
+
+auto_clone() {
+  if [[ -d "${DOTS_DIR}" && -d "${SHELL_SRC}" && -d "${CLI_SRC}" ]]; then
+    return
+  fi
+
+  step "Auto-cloning repository"
+
+  local repo_url="https://github.com/Shadoxu/caelestia-install.git"
+  local install_dir="${HOME}/.local/share/caelestia"
+
+  log "One-line install detected — cloning repository..."
+  info "Target: ${install_dir}"
+
+  if [[ -d "${install_dir}" ]]; then
+    if [[ "${NOCONFIRM}" == "true" ]]; then
+      log "Removing existing ${install_dir}..."
+      rm -rf "${install_dir}"
+    else
+      if confirm "'${install_dir}' already exists. Overwrite?"; then
+        rm -rf "${install_dir}"
+      else
+        die "Installation cancelled."
+      fi
+    fi
+  fi
+
+  log "Cloning ${repo_url}..."
+  mkdir -p "$(dirname "${install_dir}")"
+  git clone --depth=1 "${repo_url}" "${install_dir}" || \
+    die "Failed to clone repository."
+
+  log "Changing to repo directory..."
+  cd "${install_dir}" || die "Failed to cd to ${install_dir}"
+
+  exec bash "${install_dir}/caelestia-install.sh" "$@"
+}
+
+# =============================================================================
+# SECTION 6 — LOCKFILE & CLEANUP TRAP
 # =============================================================================
 
 acquire_lock() {
@@ -1016,6 +1061,7 @@ main() {
 
   check_not_root
   check_arch
+  auto_clone
   check_source_dirs
   detect_aur_helper
 
