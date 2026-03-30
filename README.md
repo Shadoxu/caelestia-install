@@ -29,7 +29,7 @@ Caelestia is a comprehensive Hyprland-based desktop environment featuring:
 ### One-Line Install
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/Shadoxu/caelestia-install/main/caelestia-install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/Shadoxu/caelestia-install/master/caelestia-install.sh)
 ```
 
 ### Manual Install
